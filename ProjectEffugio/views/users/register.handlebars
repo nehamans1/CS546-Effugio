@@ -1,0 +1,65 @@
+<h2 class="page-header">Register</h2>
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+{{/if}}
+<form method="post" action="/users/register">
+   <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" class="form-control" placeholder="Name" name="name">
+  </div>
+  <div class="form-group">
+    <label>Age</label>
+    <input type="text" class="form-control" placeholder="Age" name="age">
+  </div>
+  <div class="form-group">
+    <label>Location</label>
+    <input type="text" class="form-control" placeholder="Location" name="location">
+  </div>
+  <div class="form-group">
+    <label>Occupation</label>
+    <input type="text" class="form-control" placeholder="Occupation" name="occupation">
+  </div>
+  <div class="form-group">
+    <label>Orientation</label>
+    <input type="text" class="form-control" placeholder="Orientation" name="orientation">
+  </div>
+  <div class="form-group">
+    <label>Contact Information</label>
+    <input type="text" class="form-control" placeholder="Contact Information" name="contactInformation">
+  </div>
+   <div class="form-group">
+    <label>Location Preference 1</label>
+    <input type="text" class="form-control" placeholder="Location Preference 1" name="locationPreference1">
+  </div>
+   <div class="form-group">
+    <label>Location Preference 2</label>
+    <input type="text" class="form-control" placeholder="Location Preference 2" name="locationPreference2">
+  </div>
+   <div class="form-group">
+    <label>Location Preference 3</label>
+    <input type="text" class="form-control" placeholder="Location Preference 3" name="locationPreference3">
+  </div>
+   <div class="form-group">
+    <label>Budget Preference</label>
+    <input type="text" class="form-control" placeholder="Budget Preference" name="budgetPreference">
+  </div>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" placeholder="Username" name="username">
+  </div>
+   <div class="form-group">
+    <label>Email</label>
+    <input type="email" class="form-control" placeholder="Email" name="email">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" placeholder="Password" name="password">
+  </div>
+  <div class="form-group">
+    <label>Confirm Password</label>
+    <input type="password" class="form-control" placeholder="Password" name="password2">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
