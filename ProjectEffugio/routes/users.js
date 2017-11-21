@@ -63,7 +63,7 @@ function(req, res) {
           console.log("connections of id:: "+updated._id);
           console.log(connections);
           userToAdd={
-            user_id:"jamie_r",
+            user_id:"",
             name:"Jamie Randall",
             hashedpassword:"",
             age:30,
@@ -78,13 +78,19 @@ function(req, res) {
           userData.addUser(userToAdd,"password").then((addedUser)=>{
             console.log("added new user");
             console.log(addedUser);
-            userData.removeUser(result[0]._id).then((rem)=>{
+            userToAdd._id=addedUser._id;
+            userData.removeConnection(result[0]._id,result[1]._id).then((rem)=>{
               console.log("removed:: ");
               console.log(rem);
               userData.getAllUsers().then((all)=>{
                 console.log("Got first users:: ");
                 console.log(all);
-              res.json(all);
+                userToAdd.name="Jamie Randall R"
+                userData.updateUser(userToAdd).then((s)=>{
+                  console.log("updated:: ");
+                  console.log(s);
+                  res.json(s);
+                });
               });
             });
           });

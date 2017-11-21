@@ -142,6 +142,7 @@ let exportedMethods = {
         
         oldUser=await this.getUser(user._id);
         const updatedUser = {
+            _id:oldUser._id,
             user_id:oldUser.user_id,
             name:oldUser.name,
             age:oldUser.age,
@@ -206,12 +207,12 @@ let exportedMethods = {
 
       //remove connection
     async removeConnection(id,connectionToRemove) {
-        changeUser=await this.getRecipeByCommentID(id);
+        changeUser=await this.getUser(id);
         connections=[];
         oneComement={};
 
         for(var val of changeUser.connections){
-            if(id != val)
+            if(connectionToRemove != val)
                 {
                     connections.push(val);
                 }
@@ -224,6 +225,7 @@ let exportedMethods = {
         if (output.updatedCount === 0) {
           throw `Could not delete comment with id of ${id}`;
         }
+        return await this.getUser(changeUser._id);
       },
 
       //compare the passwords
