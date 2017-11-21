@@ -13,7 +13,7 @@ let _connection = undefined
 
 runStartup().then(function(alluser) {
     console.log("After the advanced document setup has been complete, we have the following users:");
-    // console.log(alluser);
+    console.log(alluser);
 });
 
 let connectDb = () => {
