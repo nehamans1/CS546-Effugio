@@ -141,7 +141,7 @@ let exportedMethods = {
     async updateUser(user) {
         
         oldUser=await this.getUser(user._id);
-        const newUser = {
+        const updatedUser = {
             user_id:oldUser.user_id,
             name:oldUser.name,
             age:oldUser.age,
