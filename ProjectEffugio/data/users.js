@@ -16,7 +16,7 @@ let exportedMethods = {
         
         const userCollection = await usersList();
         const listOfUsers = await userCollection.find({ user_id: user_id }).limit(1).toArray();
-        if (listOfUsers.length === 0) throw "Could not find user with username " + user_id;
+        if (listOfUsers.length === 0) return null;
             
         return listOfUsers[0];
                 
