@@ -8,21 +8,54 @@ var bcrypt = Promise.promisifyAll(require("bcrypt"));
 
 
 let exportedMethods={
+    
 
-async getAllTravel(){
-    const travelConnection = travelList();
+    async getAllTravel(){
+    	const travelConnection = awaittravelList();
+	    const listOfTravels = await travelConnection.find().toArray();
+	    travels = [];
 
-},
-async getTravelByID(_id){
-    const travelConnection = travelList();
-},
-async getIDByLocation(_location){
-    const travelConnection = travelList();
-},
+	    for(var val of listOfTravels){
+	        oneTravel = {};
+	        oneTravel._id = val._id;
+	        oneTravel.name = val.name;
+	        oneTravel.description = val.description;
 
-async addTravelData(travelData){
-    const travelConnection = travelList();
-}
+	        travels.push(oneTravel);
+	    }
+
+	    return travels;
+    },
+    async getTravelById(_id){
+	
+	    if(!_id) throw 'provide id get the travel details';
+	    const travelConnection = await travelList();
+	    const listOfTravels = await travelConnection.find({_id: _id}).limit(1).toArray();
+	    if (listOfTravels.length ===0) return null;
+	    return listOfTravels[0];
+    },
+    async getIDByLocation(name){
+	    if(!name) throw 'provide a name to give the location details';
+	    const travelConnection = await travelList();
+	    const listOfTravels = await travelConnection.fnid({name: name}).limit(1).toArray();
+	    if (listOfTravels.length ===0) return null;
+	    return listOfTravels[0];
+    },
+
+    async addTravelData(travelData){
+	    const travelConnection = await travelList();
+	    const newTravel = {
+	        _id: uuidv1(),
+	        name: travelData.name,
+	        description: travelData.description
+	    };
+	    console.log(newTravel);
+	    const newInsertInformation = await travelConnection.insertOne(newTravel);
+	    const newId = newInsertedInformation.insertedId;
+	    console.log("inserted: "+newId);
+	    return await this.getTravelById(newId);
+	
+    }
 
 
 };
