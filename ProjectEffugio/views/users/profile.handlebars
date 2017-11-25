@@ -1,3 +1,107 @@
+<h2 class="page-header">My Profile</h2>
+{{#if hasErrors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{this}}</div>
+      {{/each}}
+{{/if}}
+{{#if updSuccess}}
+      <div class="alert alert-success">"Profile updated successfully"</div>
+{{/if}}
+<form method="post" action="/users/profile">
+   <div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" class="form-control" placeholder="Name" name="name" id="name" pattern="[A-Za-z' ]+" minlength="2" maxlength="80" value="{{user.name}}">
+  </div>
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input type="text" class="form-control" placeholder="Age" name="age" id="age" pattern="[1-9][0-9]" minlength="2" maxlength="2" value={{user.age}}>
+  </div>
+  <div class="form-group">
+        <label for="gender">Gender</label>
+        <select class="form-control" name="gender" id="gender">
+          {{#select user.gender}}
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+          {{/select}}
+        </select>
+  </div>
+  <div class="form-group">
+        <label for="location">Location</label>
+        <select class="form-control" name="location" id="location">
+          {{#select user.location}}
+          <option value="NJ">New Jersey</option>
+          <option value="NY">New York</option>
+          <option value="CT">Connecticut</option>
+          <option value="CA">California</option>
+          {{/select}}
+        </select>
+  </div>
+  <div class="form-group">
+    <label for="occupation">Occupation</label>
+    <input type="text" class="form-control" placeholder="Occupation" name="occupation" id="occupation" pattern="[a-zA-Z]+[' -,]{0,1}[a-zA-Z]+" minlength="2" maxlength="80" value="{{user.occupation}}">
+  </div>
+  <div class="form-group">
+        <label for="orientation">Orientation</label>
+        <select class="form-control" name="orientation" id="orientation">
+          {{#select user.orientation}}
+          <option value="s">Straight</option>
+          <option value="g">Gay</option>
+          <option value="b">Bi</option>
+          {{/select}}
+        </select>
+  </div>
+  <div class="form-group">
+    <label for="contact_info">Contact Information</label>
+    <input type="text" class="form-control" placeholder="Phone: 0000000000" name="contact_info" id="contact_info" pattern="[1-9]{3}[0-9]{3}[0-9]{4}" value="{{user.contact_info}}">
+  </div>
+   <div class="form-group">
+    <label>Location Preference 1</label>
+    <input type="text" class="form-control" placeholder="Location Preference 1" name="locationPreference1">
+  </div>
+     <div class="form-group">
+    <label>Budget Preference 1</label>
+    <input type="text" class="form-control" placeholder="Budget Preference 1" name="budgetPreference1">
+  </div>
+   <div class="form-group">
+    <label>Location Preference 2</label>
+    <input type="text" class="form-control" placeholder="Location Preference 2" name="locationPreference2">
+  </div>
+     <div class="form-group">
+    <label>Budget Preference 2</label>
+    <input type="text" class="form-control" placeholder="Budget Preference 2" name="budgetPreference2">
+  </div>
+   <div class="form-group">
+    <label>Location Preference 3</label>
+    <input type="text" class="form-control" placeholder="Location Preference 3" name="locationPreference3">
+  </div>
+   <div class="form-group">
+    <label>Budget Preference 3</label>
+    <input type="text" class="form-control" placeholder="Budget Preference 3" name="budgetPreference3">
+  </div>
+  <div class="form-group">
+    <label for="user_id">Username</label>
+    <input type="text" class="form-control" placeholder="Username" name="user_id" id="user_id" pattern="[a-zA-Z1-9]+[_]{0,1}[a-zA-Z0-9]+" minlength="2" maxlength="50" value="{{user.user_id}}">
+  </div>
+   <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="{{user.email}}">
+  </div>
+  {{!--Commenting password fields
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" placeholder="Password" name="password">
+  </div>
+  <div class="form-group">
+    <label>New Password</label>
+    <input type="password" class="form-control" placeholder="Password" name="password2">
+  </div>
+  --}}
+  <button type="submit" class="btn btn-default">Update Profile</button>
+  <button type="reset" class="btn btn-default" value="Reset">Reset</button>
+  <input type="hidden" id="userId" name="_id" value="{{user._id}}">
+</form>
+
+{{!--Commented out previous code
 <div class="jumbotron">
   <h1 class="display-3">Hello, {{user.username}}!</h1>
   <p class="lead">Welcome to your Profile Page</p>
@@ -13,7 +117,6 @@ orientation: {{user.orientation}}<br/>
 Locations: {{user.location_pref}}<br/>
 Connections: {{user.connections}}<br/>
 
-{{!--   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/logout" role="button">Log Out</a>
-  </p> --}}
+  </p> 
 </div>
+--}}
