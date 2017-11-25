@@ -31,6 +31,19 @@ const handlebarsInstance = exphbs.create({
                 return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
         
             return new Handlebars.SafeString(JSON.stringify(obj));
+        },
+        /*select: (value, options) => {
+            var select = document.createElement('select');
+            select.innerHTML = options.fn(this);
+            select.value = value;
+            if (select.children[select.selectedIndex]){
+                select.children[select.selectedIndex].setAttribute('selected', 'selected');
+            }
+            return select.innerHTML;
+        }*/
+        //NM - added a new helper for dropdown HTML elements to display database value and retain updated values by user
+        select: (selected, options) => {
+            return options.fn(this).replace(new RegExp(' value=\"' + selected + '\"'),'$& selected="selected"');
         }
     }
 });
