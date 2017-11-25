@@ -109,10 +109,69 @@ function(req, res) {
     res.render("users/profile", {});
 }); */
 
+//NM - Declaring errors empty list variable and adding new parameters - errors, hasErrors, updSuccess to res.render
 router.get('/profile',
 require('connect-ensure-login').ensureLoggedIn("/"),
 function(req, res){
-  res.render('users/profile', { user: req.user});
+  let errors = [];
+  res.render('users/profile', {
+    errors: errors,
+    hasErrors: false,
+    updSuccess: false,
+    user: req.user
+  });
+});
+
+//NM - added a post method for My Profile page to send user profile updates to the database
+router.post("/profile", async (req, res) => {
+  let updatedProfileData = req.body;
+  //console.log("body: %j", req.body);
+  let errors = [];
+
+  //Converting the age from string (default datatype from HTML forms) to number for storing in database as integer
+  if (updatedProfileData.age) {
+    updatedProfileData.age = Number(updatedProfileData.age);
+  }
+
+/*
+  if (!blogPostData.body) {
+    errors.push("No body provided");
+  }
+*/
+
+  if (errors.length > 0) {
+    //console.log("Inside errors.length if");
+    res.render('users/profile', {
+      errors: errors,
+      hasErrors: true,
+      updSuccess: false,
+      user: updatedProfileData
+    });
+    return;
+  }
+
+  try{
+    //console.log("Inside try");
+    let updatedUserProfile = await userData.updateUser(updatedProfileData);
+    res.render('users/profile', {
+      errors: errors,
+      hasErrors: false,
+      updSuccess: true,
+      user: updatedProfileData
+    });
+    return;
+  }
+  catch(e){
+    //console.log("Inside catch");
+    //res.status(500).json({ error: e });
+    errors.push(e);
+    res.render('users/profile', {
+      errors: errors,
+      hasErrors: true,
+      updSuccess: false,
+      user: updatedProfileData
+    });
+  }
 });
 
 router.get('/dashboard',
