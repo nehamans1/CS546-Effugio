@@ -12,7 +12,7 @@ const settings = {
 };
 
 var makeDoc = function(user_id, name,hashedPassword,age,gender,location,occupation,orientation,
-    contact_info) {
+    contact_info,email) {
     return {
         _id: uuidv1(),
         user_id:user_id,
@@ -24,6 +24,7 @@ var makeDoc = function(user_id, name,hashedPassword,age,gender,location,occupati
         occupation:occupation,
         orientation:orientation,
         contact_info:contact_info,
+        email:email,
         location_pref:[],
         connections:[]
         
@@ -69,20 +70,20 @@ function runSetup() {
 
             
 
-            var userJack=makeDoc("jack_d","Jack Dawson","",25,"M","Hoboken","Teacher","s","9176567143");
+            var userJack=makeDoc("jack_d","Jack Dawson","",25,"M","NJ","Teacher","s","9176567143","fake1@email.com");
             userJack.hashedPassword="$2a$16$mEbkQxGZt3a/qidjcCb6O..ah9yyDlGRj2lWpSK/ebQJJjSp1ISmS";
             addLocationPreference(userJack,"1234",1);
             addLocationPreference(userJack,"4321",2);
             addLocationPreference(userJack,"5678",1);
 
-            var userRose=makeDoc("rose_d","Rose Dewitt","",25,"F","Hoboken","Dancer","s","9136567143");
+            var userRose=makeDoc("rose_d","Rose Dewitt","",25,"F","NY","Dancer","s","9136567143","fake2@email.com");
             addLocationPreference(userRose,"1234",1);
             addLocationPreference(userRose,"4321",2);
             
             // we can use insertMany to insert an array of documents!
             return userCollection.insertOne(userJack).then(function(jackUser) {
 
-                var userRose=makeDoc("rose_d","Rose Dewitt","",25,"F","Hoboken","Dancer","s","9136567143");
+                var userRose=makeDoc("rose_d","Rose Dewitt","",25,"F","NY","Dancer","s","9136567143","fake2@email.com");
                 addLocationPreference(userRose,"1234",1);
                 addLocationPreference(userRose,"4321",2);
                 
